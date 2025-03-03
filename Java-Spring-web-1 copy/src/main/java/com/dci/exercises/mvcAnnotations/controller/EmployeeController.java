@@ -35,4 +35,12 @@ public class EmployeeController {
 		return newEmployee;
 	}
 
+	@GetMapping("/getById/{id}")
+	public Employee getById(@PathVariable(required = true) String id) {
+		return this.employees.stream()
+				.filter(s -> s.getId().equals(id))
+				.findFirst()
+				.get();
+	}
+
 }
