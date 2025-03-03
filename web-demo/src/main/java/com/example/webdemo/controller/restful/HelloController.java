@@ -1,10 +1,13 @@
 package com.example.webdemo.controller.restful;
 
+import com.example.webdemo.model.User;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +20,8 @@ import org.springframework.web.client.HttpClientErrorException.NotFound;
 @RequestMapping(value = "/hello")
 public class HelloController {
 
-  private final List<String> userNames = List.of("Mickey", "Minnie", "Donald", "Goofy");
+  private List<String> userNames = new ArrayList<>(List.of("Mickey", "Minnie", "Donald", "Goofy"));
+  private List<User> users = new ArrayList<>();
 
   //  @RequestMapping(method = RequestMethod.GET)
   @GetMapping
@@ -66,6 +70,27 @@ public class HelloController {
     }
 
     return userNameMultipleTimes;
+  }
+
+  @PostMapping("/users/names/{userName}")
+  public void createUserName(@PathVariable String userName) {
+    userNames.add(userName);
+  }
+
+  @GetMapping("/users/names")
+  public List<String> getUserNames() {
+    return userNames;
+  }
+
+  @GetMapping("/users")
+  public List<User> getUsers() {
+    return users;
+  }
+
+  @PostMapping("/users")
+  public User createUser(@RequestBody User newUser) {
+    users.add(newUser);
+    return newUser;
   }
 
 }
