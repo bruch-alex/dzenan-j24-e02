@@ -15,14 +15,10 @@ public class Project {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-
   private String title;
-
   @ManyToMany(mappedBy = "projects")
   private List<Student> students = new ArrayList<>();
-
   public Project() {}
-
   public Project(String title, List<Student> students) {
     this.title = title;
     this.students = students;

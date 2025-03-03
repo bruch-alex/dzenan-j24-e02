@@ -6,12 +6,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/welcome")
+@RequestMapping(value = "/welcome")
 public class WelcomeController {
 
   @GetMapping
   public String welcome(Model model) {
-    model.addAttribute("welcomeText", "This is welcome text which is provided to the page dynamically!");
+    model.addAttribute("welcomeText",
+        "This is welcome text which is provided to the page dynamically!");
     return "welcome";
   }
 
@@ -20,6 +21,4 @@ public class WelcomeController {
   public String welcomeEverybody() {
     return "welcomeEverybody";
   }
-
-
 }
